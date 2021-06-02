@@ -2,12 +2,12 @@ const Sequalize = require('sequelize');
 
 const sequelize = require('../util/database');
 
-const Address = sequelize.define('address', {
-    empId: {
-        type: Sequalize.INTEGER,
-        allowNull: false,
-        primaryKey : true
-    },
+const Address = sequelize.define('addresses', {
+    // empId: {
+    //     type: Sequalize.INTEGER,
+    //     allowNull: false,
+    //     primaryKey : true
+    // },
     housename: {
         type: Sequalize.STRING,
         allowNull:false

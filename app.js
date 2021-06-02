@@ -70,6 +70,15 @@ EmpRole.belongsTo(Role, {
     onDelete: 'CASCADE'
 });
 
+Address.belongsTo(Employee, {
+    foreignKey: {
+        name: 'empId'
+    },
+    onDelete: 'CASCADE'
+});
+
+
+
 
 sequelize
     .sync()

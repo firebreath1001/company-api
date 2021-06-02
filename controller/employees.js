@@ -198,12 +198,14 @@ exports.getEmployeeAddress = (req, resp, next) => {
 };
 
 exports.postEmployeeAddress = (req, resp, next) => {
+    const empId = req.params.id;
     const housename = req.body.housename;
     const city = req.body.city;
     const state = req.body.state;
     const pincode = req.body.pincode;
     const street = req.body.street;
     Address.create({
+        empId: empId,
         housename: housename,
         city: city,
         state: state,
