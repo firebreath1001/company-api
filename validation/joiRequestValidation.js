@@ -61,10 +61,11 @@ const postEmployeeRolesBodySchema = {
 
 const postEmployeeAddressesBodySchema = {
     body: joi.object().keys({
-        empId: joi.number().required(),
-        name: joi.string().max(128).required(),
-        username: joi.string().trim().required(),
-        password: joi.string().trim().required(),
+        housename: joi.string().trim().required(),
+        city: joi.string().trim().required(),
+        state: joi.string().trim().required(),
+        pincode: joi.number().required(),
+        street: joi.string().trim().required(),
     }).unknown(false)
 }
 
