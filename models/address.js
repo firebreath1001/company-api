@@ -1,32 +1,31 @@
-const { DataTypes } = require('sequelize');
+const Sequalize = require('sequelize');
 
 const sequelize = require('../util/database');
 
 const Address = sequelize.define('address', {
-    empid: {
-        type: DataTypes.INTEGER,
+    empId: {
+        type: Sequalize.INTEGER,
         allowNull: false,
         primaryKey : true
     },
-
     housename: {
-        type: DataTypes.STRING,
+        type: Sequalize.STRING,
         allowNull:false
     },
     city: {
-        type: DataTypes.STRING,
+        type: Sequalize.STRING,
         allowNull: false
     },
    state: {
-        type: DataTypes.STRING,
+        type: Sequalize.STRING,
         allowNull: false
     },
     pincode: {
-        type: DataTypes.INTEGER,
+        type: Sequalize.INTEGER,
         allowNull: false
     },
     street: {
-        type: DataTypes.STRING,
+        type: Sequalize.STRING,
         allowNull: false
     }
 });

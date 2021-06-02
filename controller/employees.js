@@ -1,5 +1,7 @@
 const Employee = require('../models/employees');
 const EmpDept = require('../models/employeeDepartment');
+const EmpRole = require('../models/employeeRole');
+const Address = require('../models/address');
 const bcrypt = require('bcrypt');
 const loginConstants =  require('../constants/login.constants');
 
@@ -67,7 +69,7 @@ exports.getEmployeeRoles = (req, resp, next) => {
         .catch(err => {
             console.log(err);
             resp.status(404).json({
-                message: 'Employee Departments not found'
+                message: 'Employee Roles not found'
             })
         });
 };
@@ -118,7 +120,7 @@ exports.postEmployeeRole = (req, resp, next) => {
     const empId = req.params.id;
     const roleId = req.body.roleId;
  
-    EmpDept.create({
+    EmpRole.create({
         empId: empId,
         roleId: roleId
     }).then(employeeRole => {
@@ -196,22 +198,20 @@ exports.getEmployeeAddress = (req, resp, next) => {
 };
 
 exports.postEmployeeAddress = (req, resp, next) => {
-    const empId = req.params.id;
     const housename = req.body.housename;
     const city = req.body.city;
     const state = req.body.state;
     const pincode = req.body.pincode;
     const street = req.body.street;
     Address.create({
-        empId: empId,
         housename: housename,
         city: city,
         state: state,
         pincode: pincode,
-        street: street,
+        street: street
     }).then(employeeAddress => {
         resp.status(200).json({
-            message: 'Address created successfully',
+            message: `Address ${employeeAddress.housename} created successfully`,
             employeeAddress
         });
     }).catch(err => {

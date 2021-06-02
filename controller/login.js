@@ -26,6 +26,7 @@ exports.login = async (req, res) => {
                 const token = jwt.sign(payload, key.jwtSecret, {expiresIn: 3600});
 
                 res.status(200).json({idToken: "Bearer " + token});
+                console.log(Token);
             } else {
                 res.status(400).json({error: "Bad request"});
             }
