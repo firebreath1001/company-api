@@ -53,6 +53,25 @@ exports.getEmployeeDepartments = (req, resp, next) => {
         });
 };
 
+exports.getEmployeeRoles = (req, resp, next) => {
+    const empId = req.params.id;
+    EmpRole.findAll({
+        attributes: ['roleId'],
+        where: { empId: empId }
+    })
+        .then(employeeRoles => {
+            resp.status(200).json({
+                employeeRoles
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            resp.status(404).json({
+                message: 'Employee Departments not found'
+            })
+        });
+};
+
 exports.postEmployee = (req, resp, next) => {
     const name = req.body.name;
     const age = req.body.age;
@@ -91,6 +110,25 @@ exports.postEmployeeDepartment = (req, resp, next) => {
         console.log(err);
         resp.status(404).json({
             message: 'Adding department for employee failed'
+        });
+    });
+};
+
+exports.postEmployeeRole = (req, resp, next) => {
+    const empId = req.params.id;
+    const roleId = req.body.roleId;
+ 
+    EmpDept.create({
+        empId: empId,
+        roleId: roleId
+    }).then(employeeRole => {
+        resp.status(200).json({
+            message: `Role ${employeeRole.roleId} added for employee ${employeeRole.empId}`
+        });
+    }).catch(err => {
+        console.log(err);
+        resp.status(404).json({
+            message: 'Adding role for employee failed'
         });
     });
 };
@@ -136,4 +174,50 @@ exports.deleteEmployee = (req, resp, next) => {
                 message: 'Employee deletion failed'
             });
         });
+};
+
+exports.getEmployeeAddress = (req, resp, next) => {
+    const empId = req.params.id;
+    Address.findAll({
+        attributes: ['housename','city','state','pincode'],
+        where: {empId: empId}
+    })
+        .then(employeeAddress => {
+            resp.status(200).json({
+                employeeAddress
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            resp.status(404).json({
+                message: 'Address not found'
+            });
+        })
+};
+
+exports.postEmployeeAddress = (req, resp, next) => {
+    const empId = req.params.id;
+    const housename = req.body.housename;
+    const city = req.body.city;
+    const state = req.body.state;
+    const pincode = req.body.pincode;
+    const street = req.body.street;
+    Address.create({
+        empId: empId,
+        housename: housename,
+        city: city,
+        state: state,
+        pincode: pincode,
+        street: street,
+    }).then(employeeAddress => {
+        resp.status(200).json({
+            message: 'Address created successfully',
+            employeeAddress
+        });
+    }).catch(err => {
+        console.log(err);
+        resp.status(404).json({
+            message: 'Address creation failed'
+        });
+    });
 };

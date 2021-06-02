@@ -41,11 +41,45 @@ const postEmployeeDepartmentBodySchema = {
     }).unknown(false)
 }
 
+const postRoleBodySchema = {
+    body: joi.object().keys({
+        name: joi.string().max(128).required()
+    }).unknown(false)
+}
+
+const editRoleBodySchema = {
+    body: joi.object().keys({
+        name: joi.string().max(128).required()
+    }).unknown(false)
+}
+
+const postEmployeeRolesBodySchema = {
+    body: joi.object().keys({
+        roleId: joi.number().required()
+    }).unknown(false)
+}
+
+const postEmployeeAddressesBodySchema = {
+    body: joi.object().keys({
+        empId: joi.number().required(),
+        name: joi.string().max(128).required(),
+        username: joi.string().trim().required(),
+        password: joi.string().trim().required(),
+    }).unknown(false)
+}
+
+
+
+
 module.exports = {
     idParamsSchema,
     postEmployeeBodySchema,
     editEmployeeBodySchema,
     postDepartmentBodySchema,
     editDepartmentBodySchema,
-    postEmployeeDepartmentBodySchema
+    postEmployeeDepartmentBodySchema,
+    postRoleBodySchema,
+    editRoleBodySchema,
+    postEmployeeRolesBodySchema,
+    postEmployeeAddressesBodySchema
 };

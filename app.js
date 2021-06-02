@@ -8,9 +8,13 @@ const { notFound, convertError } = require('./middleware/errorMiddleware')
 const Employee = require('./models/employees');
 const Department = require('./models/departments');
 const EmpDept = require('./models/employeeDepartment');
+const Role = require('./models/roles');
+const EmpRole = require('./models/employeeRole');
+const Address = require('./models/address');
 
 const empRoutes = require('./routes/employees');
 const depRoutes = require('./routes/departments');
+const rolRoutes = require('./routes/roles');
 const loginRoute = require('./routes/login');
 
 
@@ -27,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // API routes
 app.use('/employees', empRoutes);
 app.use('/departments', depRoutes);
+app.use('/roles', rolRoutes);
 app.use('/login', loginRoute);
 
 // Error Middlewares
@@ -41,10 +46,26 @@ EmpDept.belongsTo(Employee, {
     onDelete: 'CASCADE'
 });
 
+
 // Department.hasMany(EmpDept);
 EmpDept.belongsTo(Department, {
     foreignKey: {
         name: 'deptId'
+    },
+    onDelete: 'CASCADE'
+});
+
+
+EmpRole.belongsTo(Employee, {
+    foreignKey: {
+        name: 'empId'
+    },
+    onDelete: 'CASCADE'
+});
+
+EmpRole.belongsTo(Role, {
+    foreignKey: {
+        name: 'roleId'
     },
     onDelete: 'CASCADE'
 });
